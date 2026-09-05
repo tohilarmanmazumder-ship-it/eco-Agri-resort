@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoAgri Resort — Integrated Sustainable Farming & Smart Agriculture Ecosystem</title>
+<meta name="description" content="EcoAgri Resort: an integrated sustainable farming ecosystem with a Digital Farm Mentor for smart agriculture decisions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --forest:#12362B;
+  --forest-2:#0D2A21;
+  --moss:#3C7A5E;
+  --moss-light:#7BAE8F;
+  --mist:#EEF2E8;
+  --mist-2:#E3EADA;
+  --paper:#FBFCF9;
+  --water:#2B6E86;
+  --water-light:#8FC1D1;
+  --soil:#8A5A34;
+  --soil-light:#C79A6E;
+  --amber:#E2A33B;
+  --ink:#151A16;
+  --ink-soft:#4B564D;
+  --line:#D7DECB;
+  --danger:#B3402A;
+  --radius-s:6px;
+  --radius-m:14px;
+  --radius-l:26px;
+  --shadow:0 10px 30px -14px rgba(18,54,43,0.28);
+  --serif:'Fraunces', serif;
+  --sans:'Inter', sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); background:var(--mist);
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+h1,h2,h3,h4{font-family:var(--serif); color:var(--forest-2); margin:0; line-height:1.08; font-weight:600;}
+p{line-height:1.65; color:var(--ink-soft); margin:0 0 1em;}
+.container{max-width:1180px; margin:0 auto; padding:0 clamp(18px,4vw,40px);}
+.eyebrow{font-family:var(--sans); font-weight:700; font-size:.78rem; color:var(--moss); letter-spacing:.02em;}
+:focus-visible{outline:3px solid var(--amber); outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;} }
+
+/* ============ NAV ============ */
+header.site{
+  position:sticky; top:0; z-index:500; background:rgba(251,252,249,0.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); transition:box-shadow .25s ease, border-color .25s ease;
+}
+header.site.scrolled{box-shadow:0 8px 24px -18px rgba(18,54,43,0.35); border-bottom-color:transparent;}
+.nav-row{display:flex; align-items:center; justify-content:space-between; padding:14px clamp(18px,4vw,40px); gap:20px;}
+.brand{display:flex; align-items:center; gap:10px; font-family:var(--serif); font-weight:600; font-size:1.15rem; color:var(--forest-2); transition:opacity .15s;}
+.brand:hover{opacity:.8;}
+.brand-mark{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 200deg, var(--moss), var(--water), var(--amber), var(--moss)); position:relative; flex-shrink:0;}
+.brand-mark::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--paper);}
+nav.primary{display:flex; align-items:center; gap:2px; flex-wrap:wrap;}
+nav.primary a{
+  position:relative; font-size:.86rem; font-weight:600; color:var(--ink-soft); padding:9px 12px; border-radius:999px; white-space:nowrap;
+  transition:background .18s, color .18s;
+}
+nav.primary a:hover{background:var(--mist-2); color:var(--forest-2);}
+nav.primary a.active{color:var(--forest-2);}
+nav.primary a.active::after{content:"";position:absolute; left:12px; right:12px; bottom:2px; height:2px; border-radius:2px; background:var(--amber);}
+.nav-cta{background:var(--forest); color:var(--paper) !important; padding:9px 16px !important; border-radius:999px; transition:background .18s, transform .15s;}
+.nav-cta:hover{background:var(--forest-2); transform:translateY(-1px);}
+.nav-cta.active::after{display:none;}
+.nav-toggle{display:none; background:none; border:none; padding:8px; border-radius:8px; transition:background .15s;}
+.nav-toggle:hover{background:var(--mist-2);}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--forest-2);margin:5px 0;border-radius:2px; transition:transform .2s, opacity .2s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media (max-width:1050px){
+  nav.primary{
+    display:flex; position:fixed; inset:64px 0 0 0; background:var(--paper); flex-direction:column; align-items:stretch;
+    padding:10px 18px 30px; overflow-y:auto; z-index:400;
+    opacity:0; visibility:hidden; transform:translateY(-8px); transition:opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  nav.primary.open{opacity:1; visibility:visible; transform:translateY(0);}
+  nav.primary a{padding:14px 10px; border-bottom:1px solid var(--line); border-radius:0; font-size:1rem;}
+  nav.primary a.active::after{display:none;}
+  nav.primary a.active{color:var(--moss);}
+  .nav-toggle{display:block;}
+}
+
+/* ============ PAGES ============ */
+.page{display:none;}
+.page.active{display:block; animation:pagein .4s ease;}
+@keyframes pagein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+section{padding:clamp(50px,7vw,96px) 0;}
+.section-tight{padding:clamp(30px,4vw,56px) 0;}
+.section-head{max-width:680px; margin-bottom:clamp(28px,4vw,46px); position:relative; padding-left:16px; border-left:3px solid var(--moss-light);}
+.section-head.center{padding-left:0; border-left:none;}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem); margin-top:8px;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0;}
+.tag{font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:999px; border:1px solid var(--line); color:var(--ink-soft); background:var(--paper);}
+.tag.blue{border-color:#bcd9e2; color:var(--water); background:#EAF4F7;}
+.tag.amber{border-color:#f0d9ad; color:#8a611c; background:#FBF2DF;}
+.tag.green{border-color:#bcd9c6; color:var(--moss); background:#E9F3EC;}
+.tag.gray{border-color:var(--line); color:var(--ink-soft);}
+
+/* ============ HERO ============ */
+.hero{background:linear-gradient(180deg, var(--mist) 0%, #E6EEDC 100%); overflow:hidden; position:relative;}
+.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center;}
+@media (max-width:940px){.hero-grid{grid-template-columns:1fr;}}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);}
+.hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem); letter-spacing:-0.01em;}
+.hero .lede{font-size:1.18rem; font-family:var(--serif); font-weight:500; color:var(--forest); margin:16px 0 12px; max-width:520px;}
+.hero .desc{max-width:520px; font-size:1.02rem;}
+.btn-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
+.btn{padding:14px 24px; border-radius:999px; font-weight:700; font-size:.95rem; border:2px solid transparent; display:inline-flex; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s, background .15s, border-color .15s;}
+.btn:active{transform:translateY(0);}
+.btn-primary{background:var(--forest); color:var(--paper); box-shadow:0 8px 20px -10px rgba(18,54,43,0.55);}
+.btn-primary:hover{background:var(--forest-2); transform:translateY(-2px); box-shadow:0 12px 26px -10px rgba(18,54,43,0.6);}
+.btn-secondary{background:transparent; border-color:var(--forest); color:var(--forest);}
+.btn-secondary:hover{background:var(--forest); color:var(--paper); transform:translateY(-2px);}
+.btn-ghost{background:var(--paper); border-color:var(--line); color:var(--ink);}
+.btn-ghost:hover{border-color:var(--moss); color:var(--forest-2); transform:translateY(-2px);}
+.btn-sm{padding:9px 16px; font-size:.82rem;}
+.hero-stats{display:flex; gap:28px; margin-top:40px; flex-wrap:wrap;}
+.hero-stats div b{display:block; font-family:var(--serif); font-size:1.5rem; color:var(--forest-2);}
+.hero-stats div span{font-size:.78rem; color:var(--ink-soft);}
+
+/* Hero animated loop illustration */
+.hero-art{position:relative; aspect-ratio:1/1; max-width:480px; margin:0 auto;}
+.hero-art svg{width:100%;height:100%;}
+.flow-dot{fill:var(--water);}
+.spin-slow{animation:spin 40s linear infinite; transform-origin:250px 250px;}
+.spin-rev{animation:spin 55s linear infinite reverse; transform-origin:250px 250px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.bob{animation:bob 4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* Feature strip */
+.strip{background:var(--forest); color:var(--paper); overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);}
+.strip-track{display:flex; gap:0; }
+.strip-inner{display:flex; gap:0; animation:marquee 32s linear infinite;}
+.strip:hover .strip-inner{animation-play-state:paused;}
+@keyframes marquee{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+.strip-item{display:flex; align-items:center; gap:10px; padding:20px 34px; font-weight:600; font-size:.95rem; border-right:1px solid rgba(255,255,255,0.14); white-space:nowrap;}
+.strip-item .ic{width:8px;height:8px;border-radius:50%;background:var(--amber);}
+
+/* Cards generic */
+.grid{display:grid; gap:22px;}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+@media (max-width:900px){.grid-3,.grid-4{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:600px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;} }
+.card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-m); padding:24px; transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;}
+.card:hover{box-shadow:var(--shadow); transform:translateY(-3px); border-color:#c7d4b8;}
+.card-soft{background:var(--mist-2); border:1px solid var(--line); border-radius:var(--radius-m); padding:24px;}
+.card h3{font-size:1.15rem; margin-bottom:8px;}
+.card .ic{width:42px;height:42px;border-radius:12px; display:flex;align-items:center;justify-content:center; margin-bottom:14px;}
+.icon-badge{transition:transform .2s ease;}
+.card:hover .icon-badge{transform:scale(1.08) rotate(-3deg);}
+
+/* Not-isolated section */
+.split{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+@media (max-width:900px){.split{grid-template-columns:1fr;}}
+.quote-block{background:var(--forest); color:var(--paper); border-radius:var(--radius-l); padding:clamp(28px,4vw,44px);}
+.quote-block p{color:#DCE7DC; font-family:var(--serif); font-size:1.25rem; font-weight:500; line-height:1.5;}
+
+/* ============ FARM MENTOR / FORMS ============ */
+.mentor-shell{display:grid; grid-template-columns:260px 1fr; gap:32px;}
+@media (max-width:880px){.mentor-shell{grid-template-columns:1fr;}}
+.mentor-nav{display:flex; flex-direction:column; gap:4px; position:sticky; top:90px; align-self:start;}
+.mentor-nav button{
+  text-align:left; padding:12px 14px; border-radius:var(--radius-s); border:1px solid transparent; background:transparent;
+  font-weight:600; color:var(--ink-soft); font-size:.9rem;
+}
+.mentor-nav button.active{background:var(--paper); border-color:var(--line); color:var(--forest-2); box-shadow:var(--shadow);}
+.mentor-step{display:none;}
+.mentor-step.active{display:block; animation:pagein .3s ease;}
+.field{margin-bottom:16px;}
+.field label{display:block; font-weight:700; font-size:.85rem; margin-bottom:6px; color:var(--forest-2);}
+.field .hint{font-size:.78rem; color:var(--ink-soft); margin-top:4px;}
+.field input, .field select, .field textarea{
+  width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:var(--radius-s); font-family:inherit; font-size:.95rem; background:var(--paper);
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--moss);}
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:560px){.two-col{grid-template-columns:1fr;}}
+.chip-select{display:flex; flex-wrap:wrap; gap:8px;}
+.chip{padding:8px 14px; border:1px solid var(--line); border-radius:999px; font-size:.85rem; font-weight:600; background:var(--paper); color:var(--ink-soft); cursor:pointer; transition:all .15s ease; user-select:none;}
+.chip:hover{border-color:var(--moss); color:var(--forest-2);}
+.chip.picked{background:var(--forest); color:var(--paper); border-color:var(--forest);}
+.chip.picked:hover{background:var(--forest-2); color:var(--paper);}
+.data-source{font-size:.72rem; font-weight:700; padding:3px 9px; border-radius:6px; display:inline-block; margin-bottom:8px;}
+.ds-farmer{background:#E9F3EC; color:var(--moss);}
+.ds-location{background:#EAF4F7; color:var(--water);}
+.ds-calc{background:#FBF2DF; color:#8a611c;}
+.ds-general{background:#EFEDE6; color:#6b6455;}
+.ds-verify{background:#FBEAE4; color:var(--danger);}
+.weather-box{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+@media (max-width:700px){.weather-box{grid-template-columns:repeat(2,1fr);}}
+.weather-tile{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-m); padding:16px; text-align:center; transition:border-color .15s, transform .15s;}
+.weather-tile:hover{border-color:var(--water-light); transform:translateY(-2px);}
+.weather-tile b{display:block; font-family:var(--serif); font-size:1.4rem; color:var(--forest-2);}
+.weather-tile span{font-size:.75rem; color:var(--ink-soft);}
+.notice{border-left:4px solid var(--amber); background:#FBF2DF; padding:12px 16px; border-radius:8px; font-size:.88rem; color:#6b5124; margin:14px 0;}
+.notice.blue{border-color:var(--water); background:#EAF4F7; color:#1f4c5c;}
+.notice.red{border-color:var(--danger); background:#FBEAE4; color:#7d2e1c;}
+.plan-item{border:1px solid var(--line); border-left:3px solid var(--moss-light); border-radius:var(--radius-m); padding:18px; margin-bottom:12px; background:var(--paper); transition:border-color .15s, box-shadow .15s;}
+.plan-item:hover{box-shadow:var(--shadow); border-left-color:var(--amber);}
+.plan-item h4{font-size:1.02rem; margin-bottom:6px;}
+.plan-item .why{font-size:.88rem; color:var(--ink-soft); font-style:italic;}
+.range-out{font-weight:700; color:var(--forest-2);}
+
+/* ============ ECOCYCLE ============ */
+.ecocycle-wrap{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+@media (max-width:900px){.ecocycle-wrap{grid-template-columns:1fr;}}
+.cycle-node{cursor:pointer;}
+.cycle-node circle{transition:stroke-width .15s, stroke .15s, filter .15s;}
+.cycle-node:hover circle{stroke:var(--moss); stroke-width:3; filter:drop-shadow(0 4px 8px rgba(18,54,43,0.2));}
+.cycle-node.selected circle{stroke:var(--amber); stroke-width:3; filter:drop-shadow(0 4px 10px rgba(226,163,59,0.4));}
+.cycle-detail{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-l); padding:26px; min-height:320px;}
+.flow-line{fill:none; stroke:var(--water-light); stroke-width:3; stroke-dasharray:6 8;}
+.flow-line.animate{animation:dash 2.4s linear infinite;}
+@keyframes dash{to{stroke-dashoffset:-56;}}
+
+/* ============ EXPLORE RESORT MAP ============ */
+.map-wrap{display:grid; grid-template-columns:1.3fr 1fr; gap:32px;}
+@media (max-width:900px){.map-wrap{grid-template-columns:1fr;}}
+.zone{cursor:pointer;}
+.zone rect, .zone circle, .zone ellipse, .zone path.zshape{transition:fill .15s, stroke .15s, stroke-width .15s;}
+.zone:hover rect, .zone:hover circle, .zone:hover ellipse{fill:#E9F3EC; stroke:var(--moss);}
+.zone.selected rect, .zone.selected circle, .zone.selected ellipse{stroke:var(--amber); stroke-width:3; fill:#FBF2DF;}
+.zone text{font-family:var(--sans); font-size:11px; font-weight:700; fill:var(--forest-2);}
+
+/* ============ TABLE ============ */
+table.clean{width:100%; border-collapse:collapse; font-size:.9rem;}
+table.clean th, table.clean td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line);}
+table.clean th{color:var(--forest-2); font-family:var(--serif); font-weight:600;}
+
+/* ============ ACCORDION ============ */
+.acc-item{border-bottom:1px solid var(--line);}
+.acc-item button.acc-head{width:100%; text-align:left; background:none; border:none; padding:16px 4px; display:flex; justify-content:space-between; align-items:center; font-weight:700; color:var(--forest-2); font-family:var(--serif); font-size:1.05rem; cursor:pointer; transition:color .15s;}
+.acc-item button.acc-head:hover{color:var(--moss);}
+.acc-body{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+.acc-body-in{padding:0 4px 16px;}
+.acc-item.open .acc-body{max-height:600px;}
+.acc-item.open .acc-plus{transform:rotate(45deg);}
+.acc-plus{transition:transform .2s; font-size:1.3rem; font-weight:400;}
+
+/* ============ TIMELINE / EXHIBITION ============ */
+.exhibit-progress{display:flex; gap:4px; margin-bottom:26px;}
+.exhibit-progress div{height:5px; flex:1; background:var(--line); border-radius:3px;}
+.exhibit-progress div.done{background:var(--moss);}
+.exhibit-slide{display:none;}
+.exhibit-slide.active{display:block; animation:pagein .35s ease;}
+.exhibit-slide .num{font-family:var(--serif); font-size:3rem; color:var(--moss-light); font-weight:600;}
+
+/* ============ IMPACT ============ */
+.gauge{position:relative; width:140px; height:140px; margin:0 auto 10px;}
+.gauge svg{transform:rotate(-90deg);}
+.gauge-label{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:1.5rem; color:var(--forest-2);}
+
+/* ============ FOOTER ============ */
+footer{background:var(--forest-2); color:#CFE0D2; padding:50px 0 26px;}
+footer a{color:#CFE0D2;}
+footer .fgrid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:30px;}
+@media (max-width:760px){footer .fgrid{grid-template-columns:1fr 1fr;}}
+footer h4{color:var(--paper); font-size:.85rem; margin-bottom:12px; font-family:var(--sans); letter-spacing:.02em;}
+footer li{list-style:none; margin-bottom:8px; font-size:.85rem;}
+footer ul{padding:0; margin:0;}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.12); margin-top:36px; padding-top:20px; font-size:.78rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+/* Utility */
+.mt0{margin-top:0;}
+.center{text-align:center;}
+.small{font-size:.85rem;}
+.bold{font-weight:700;}
+.flex{display:flex;}
+.gap8{gap:8px;} .gap12{gap:12px;} .gap16{gap:16px;}
+.wrap{flex-wrap:wrap;}
+.result-hidden{display:none;}
+hr.soft{border:none;border-top:1px solid var(--line); margin:24px 0;}
+.icon-badge{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.badge-water{background:#EAF4F7;} .badge-green{background:#E9F3EC;} .badge-amber{background:#FBF2DF;} .badge-soil{background:#F3E9DE;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ HEADER / NAV ============================================================ -->
+<header class="site">
+  <div class="nav-row">
+    <a href="#home" class="brand"><span class="brand-mark"></span> EcoAgri Resort</a>
+    <nav class="primary" id="primaryNav">
+      <a href="#home">Home</a>
+      <a href="#myfarm">My Farm</a>
+      <a href="#mentor">Farm Mentor</a>
+      <a href="#crop">Crop Advisor</a>
+      <a href="#water">Water</a>
+      <a href="#hydroponics">Hydroponics</a>
+      <a href="#drip">Drip Irrigation</a>
+      <a href="#organic">Organic Farm</a>
+      <a href="#livestock">Livestock</a>
+      <a href="#biogas">Biogas</a>
+      <a href="#energy">Energy</a>
+      <a href="#ecocycle">EcoCycle</a>
+      <a href="#planner">Farm Planner</a>
+      <a href="#explore">Explore Resort</a>
+      <a href="#knowledge">Knowledge Centre</a>
+      <a href="#impact">Impact</a>
+      <a href="#exhibition">Exhibition</a>
+      <a href="#about">About</a>
+      <a href="#mentor" class="nav-cta">Start My Farm</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================ HOME ============================================================ -->
+<section class="page" id="page-home">
+  <div class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow"><span class="dot"></span><span class="eyebrow">JAWAHAR NAVODAYA VIDYALAYA, MONACHERRA</span></div>
+          <h1>ECOAGRI RESORT</h1>
+          <p class="lede">An Integrated Sustainable Farming &amp; Smart Agriculture Ecosystem</p>
+          <p class="desc">Connecting water, crops, livestock, renewable energy and resource recovery into one intelligent farming ecosystem — and extending it digitally through a Farm Mentor that helps real farmers make better-informed decisions.</p>
+          <div class="btn-row">
+            <a href="#mentor" class="btn btn-primary">Start My Farm</a>
+            <a href="#explore" class="btn btn-secondary">Explore EcoAgri Resort</a>
+            <a href="#ecocycle" class="btn btn-ghost">Explore the EcoCycle</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>9</b><span>Connected systems</span></div>
+            <div><b>1</b><span>Digital Farm Mentor</span></div>
+            <div><b>10</b><span>Exhibition model zones</span></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 500 500">
+            <circle cx="250" cy="250" r="200" fill="none" stroke="#D7DECB" stroke-width="1.5"/>
+            <g class="spin-slow">
+              <circle cx="250" cy="60" r="7" fill="#2B6E86"/>
+              <circle cx="440" cy="250" r="7" fill="#3C7A5E"/>
+              <circle cx="250" cy="440" r="7" fill="#8A5A34"/>
+              <circle cx="60" cy="250" r="7" fill="#E2A33B"/>
+            </g>
+            <g class="spin-rev">
+              <circle cx="250" cy="250" r="150" fill="none" stroke="#D7DECB" stroke-width="1" stroke-dasharray="2 8"/>
+            </g>
+            <!-- greenhouse -->
+            <g class="bob" transform="translate(160,190)">
+              <polygon points="0,40 45,10 90,40" fill="#7BAE8F"/>
+              <rect x="8" y="40" width="74" height="46" fill="#EAF4E9" stroke="#3C7A5E" stroke-width="2"/>
+              <line x1="45" y1="40" x2="45" y2="86" stroke="#3C7A5E" stroke-width="2"/>
+            </g>
+            <!-- storage tank -->
+            <g transform="translate(300,210)">
+              <rect x="0" y="0" width="46" height="66" rx="8" fill="#8FC1D1" stroke="#2B6E86" stroke-width="2"/>
+              <rect x="4" y="30" width="38" height="32" fill="#2B6E86" opacity="0.4"/>
+            </g>
+            <!-- sun/solar -->
+            <g transform="translate(210,300)">
+              <rect x="0" y="0" width="70" height="8" fill="#E2A33B"/>
+              <rect x="0" y="12" width="70" height="8" fill="#E2A33B"/>
+              <circle cx="35" cy="-22" r="14" fill="#E2A33B" opacity="0.85"/>
+            </g>
+            <text x="250" y="475" text-anchor="middle" font-family="Inter" font-size="12" fill="#4B564D">Collect · Store · Produce · Recover · Reuse</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-track">
+      <div class="strip-inner" id="stripInner"></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">THE PRINCIPLE</span>
+          <h2>Not just a farm.<br>A connected ecosystem.</h2>
+          <p>Most farm technologies are adopted in isolation — a pump here, a greenhouse there. EcoAgri Resort instead treats water, crops, livestock, energy and waste as one circulating system, where every resource is used efficiently and, where safely and technically appropriate, recovered and reused.</p>
+          <p class="small">This is a working model built for exhibition. Figures on this site describing potential resource recovery are conceptual and demonstration-based unless stated otherwise.</p>
+          <a href="#ecocycle" class="btn btn-secondary btn-sm">See how the cycle connects →</a>
+        </div>
+        <div class="quote-block">
+          <p>“EcoAgri Resort does not treat farming technologies as isolated solutions. It connects water, crops, livestock, energy and resource recovery into one integrated ecosystem — and extends that ecosystem digitally through a Farm Mentor that helps farmers make better-informed decisions based on their own conditions.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" style="background:var(--mist-2)">
+    <div class="container">
+      <div class="section-head center" style="margin:0 auto;">
+        <span class="eyebrow">HOW A VISITOR MOVES THROUGH THIS SITE</span>
+        <h2>From understanding the model to your own farm plan</h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card"><span class="icon-badge badge-green">🌱</span><h3>1. Understand</h3><p class="small">See how EcoAgri Resort connects water, farming, livestock and energy.</p></div>
+        <div class="card"><span class="icon-badge badge-water">🔄</span><h3>2. Explore</h3><p class="small">Walk through the EcoCycle and the physical exhibition model.</p></div>
+        <div class="card"><span class="icon-badge badge-amber">🧑‍🌾</span><h3>3. Enter your farm</h3><p class="small">Tell the Farm Mentor about your location, soil, water and goals.</p></div>
+        <div class="card"><span class="icon-badge badge-soil">📋</span><h3>4. Get guidance</h3><p class="small">Receive a structured, reasoned Farm Guidance Plan you can act on.</p></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ MY FARM (profile hub) ============================================================ -->
+<section class="page" id="page-myfarm">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">MY FARM</span>
+        <h2>Your farm profile</h2>
+        <p>Everything you enter here is saved only on this device (local storage) and feeds directly into your Digital Farm Mentor guidance plan, the Crop Advisor and the Farm Planner.</p>
+      </div>
+      <div class="notice blue">Nothing you enter is sent to a server owned by this project — it stays in your browser. Clear it anytime with the button below.</div>
+      <div id="myFarmSummary" class="grid grid-3"></div>
+      <div class="btn-row" style="margin-top:20px;">
+        <a href="#mentor" class="btn btn-primary btn-sm">Open Farm Mentor →</a>
+        <button class="btn btn-ghost btn-sm" onclick="clearFarmData()">Clear my saved data</button>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ FARM MENTOR ============================================================ -->
+<section class="page" id="page-mentor">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">DIGITAL FARM MENTOR</span>
+        <h2>Tell us about your farm</h2>
+        <p>Work through the steps on the left. At the end you'll receive a structured Farm Guidance Plan, built from what you enter here plus (optionally) live weather for your location.</p>
+      </div>
+      <div class="mentor-shell">
+        <div class="mentor-nav" id="mentorNav">
+          <button data-step="location" class="active">1 · Location &amp; Weather</button>
+          <button data-step="soil">2 · Soil Profile</button>
+          <button data-step="farm">3 · Farm Profile</button>
+          <button data-step="plan">4 · Guidance Plan</button>
+        </div>
+        <div>
+          <!-- STEP 1: LOCATION -->
+          <div class="mentor-step active" data-panel="location">
+            <div class="card">
+              <h3>Where is your farm?</h3>
+              <div class="btn-row" style="margin-top:6px;">
+                <button class="btn btn-primary btn-sm" onclick="useMyLocation()">📍 Use my current location</button>
+                <span class="small" id="locStatus"></span>
+              </div>
+              <div class="notice">Your browser will ask permission before sharing location. If you deny it, or prefer not to, just fill in the fields below manually.</div>
+              <div class="two-col">
+                <div class="field"><label>State</label><input type="text" id="f-state" placeholder="e.g. Assam"></div>
+                <div class="field"><label>District</label><input type="text" id="f-district" placeholder="e.g. Hailakandi"></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Village / Town</label><input type="text" id="f-village" placeholder="e.g. Monacherra"></div>
+                <div class="field"><label>Latitude, Longitude (optional)</label><input type="text" id="f-latlng" placeholder="e.g. 24.68, 92.56"></div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="fetchWeatherManual()">Get weather for this location</button>
+
+              <div id="weatherResult" class="result-hidden" style="margin-top:22px;">
+                <span class="data-source ds-location">Location-Based Information · Live Weather API</span>
+                <div class="weather-box" id="weatherTiles"></div>
+                <p class="small" id="weatherMeta" style="margin-top:10px;"></p>
+                <div class="notice blue">GPS or an address gives your location, not your soil. Weather data comes from an open weather service (Open-Meteo) for your coordinates — it does not measure conditions inside your specific field.</div>
+              </div>
+              <div id="weatherError" class="notice red result-hidden"></div>
+            </div>
+            <div class="btn-row" style="margin-top:18px;"><button class="btn btn-primary" onclick="goStep('soil')">Continue to Soil Profile →</button></div>
+          </div>
+
+          <!-- STEP 2: SOIL -->
+          <div class="mentor-step" data-panel="soil">
+            <div class="card">
+              <h3>Soil profile</h3>
+              <span class="data-source ds-farmer">Farmer-Provided Data (recommended)</span>
+              <p class="small">If you have a soil test report, enter its values below — this is the most reliable soil information the Mentor can use.</p>
+              <div class="two-col">
+                <div class="field"><label>Soil pH</label><input type="number" step="0.1" id="s-ph" placeholder="e.g. 6.2"></div>
+                <div class="field"><label>Soil texture / type</label>
+                  <select id="s-texture"><option value="">Select</option><option>Sandy</option><option>Sandy loam</option><option>Loamy</option><option>Clay loam</option><option>Clay</option><option>Silty</option><option>Not sure</option></select>
+                </div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Nitrogen (N) level</label><select id="s-n"><option value="">Not tested</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+                <div class="field"><label>Phosphorus (P) level</label><select id="s-p"><option value="">Not tested</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Potassium (K) level</label><select id="s-k"><option value="">Not tested</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+                <div class="field"><label>Organic carbon</label><select id="s-oc"><option value="">Not tested</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+              </div>
+              <div class="field"><label>Soil moisture (if measured)</label><select id="s-moisture"><option value="">Not measured</option><option>Dry</option><option>Moderate</option><option>Wet / waterlogged</option></select></div>
+              <div class="field">
+                <label>Upload soil test report (optional — kept on this device only, not analyzed automatically)</label>
+                <input type="file" id="s-upload" accept=".pdf,.jpg,.png,.jpeg">
+                <p class="hint" id="s-upload-name"></p>
+              </div>
+              <div class="notice">This project does not physically measure your soil. Reference soil information for your district may exist in government soil-health datasets, but treat any such figures as <b>estimated/reference data</b>, never as a substitute for a real soil test.</div>
+            </div>
+            <div class="btn-row" style="margin-top:18px;">
+              <button class="btn btn-ghost" onclick="goStep('location')">← Back</button>
+              <button class="btn btn-primary" onclick="goStep('farm')">Continue to Farm Profile →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: FARM PROFILE -->
+          <div class="mentor-step" data-panel="farm">
+            <div class="card">
+              <h3>Farm profile</h3>
+              <div class="two-col">
+                <div class="field"><label>Land area</label><input type="number" id="fp-area" placeholder="e.g. 1.5"></div>
+                <div class="field"><label>Unit</label><select id="fp-areaunit"><option>Acres</option><option>Bigha</option><option>Hectares</option><option>Katha</option></select></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Water source</label><select id="fp-watersource"><option value="">Select</option><option>Rainfed only</option><option>Bore well</option><option>Open well</option><option>Pond / tank</option><option>Canal / river</option><option>Municipal supply</option></select></div>
+                <div class="field"><label>Water availability</label><select id="fp-wateravail"><option value="">Select</option><option>Scarce / seasonal</option><option>Moderate</option><option>Abundant</option></select></div>
+              </div>
+              <div class="field"><label>Current irrigation method</label><select id="fp-irrigation"><option value="">Select</option><option>None / rain only</option><option>Flood irrigation</option><option>Sprinkler</option><option>Drip</option><option>Manual (bucket/can)</option></select></div>
+              <div class="field"><label>Current crops (comma separated)</label><input type="text" id="fp-currentcrops" placeholder="e.g. rice, betel leaf"></div>
+              <div class="field"><label>Desired / interested crops (comma separated)</label><input type="text" id="fp-desiredcrops" placeholder="e.g. tomato, leafy greens"></div>
+              <div class="field"><label>Livestock (select all that apply)</label>
+                <div class="chip-select" id="fp-livestock">
+                  <span class="chip" data-val="Cattle">Cattle</span><span class="chip" data-val="Poultry">Poultry</span><span class="chip" data-val="Goats">Goats</span><span class="chip" data-val="Pigs">Pigs</span><span class="chip" data-val="Fish">Fish</span><span class="chip" data-val="None">None</span>
+                </div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Budget range</label><select id="fp-budget"><option value="">Select</option><option>Very limited</option><option>Moderate</option><option>Flexible</option></select></div>
+                <div class="field"><label>Farming experience</label><select id="fp-experience"><option value="">Select</option><option>New to farming</option><option>Some experience</option><option>Experienced</option></select></div>
+              </div>
+              <div class="field"><label>Main goal (select up to two)</label>
+                <div class="chip-select" id="fp-goals">
+                  <span class="chip" data-val="Higher productivity">Higher productivity</span>
+                  <span class="chip" data-val="Lower water use">Lower water use</span>
+                  <span class="chip" data-val="Lower labour requirement">Lower labour</span>
+                  <span class="chip" data-val="Organic production">Organic production</span>
+                  <span class="chip" data-val="Diversification">Diversification</span>
+                  <span class="chip" data-val="Livestock integration">Livestock integration</span>
+                  <span class="chip" data-val="Resource recovery">Resource recovery</span>
+                  <span class="chip" data-val="Better farm planning">Better planning</span>
+                  <span class="chip" data-val="Sustainable farming">Sustainable farming</span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-row" style="margin-top:18px;">
+              <button class="btn btn-ghost" onclick="goStep('soil')">← Back</button>
+              <button class="btn btn-primary" onclick="generatePlan()">Generate My Farm Guidance Plan →</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: PLAN -->
+          <div class="mentor-step" data-panel="plan">
+            <div id="planOutput"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ CROP ADVISOR ============================================================ -->
+<section class="page" id="page-crop">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">CROP ADVISOR</span>
+        <h2>Find crop categories that may fit your conditions</h2>
+        <p>Choose your conditions below. This shows potentially suitable crop categories, not a guarantee of yield or profit.</p>
+      </div>
+      <div class="card">
+        <div class="two-col">
+          <div class="field"><label>Season</label><select id="ca-season"><option value="">Select</option><option>Kharif (monsoon)</option><option>Rabi (winter)</option><option>Zaid (summer)</option><option>Year-round / greenhouse</option></select></div>
+          <div class="field"><label>Soil type</label><select id="ca-soil"><option value="">Select</option><option>Sandy</option><option>Sandy loam</option><option>Loamy</option><option>Clay loam</option><option>Clay</option></select></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><label>Soil pH range</label><select id="ca-ph"><option value="">Select</option><option>Acidic (below 6)</option><option>Neutral (6–7.5)</option><option>Alkaline (above 7.5)</option></select></div>
+          <div class="field"><label>Water availability</label><select id="ca-water"><option value="">Select</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><label>Land size</label><select id="ca-land"><option value="">Select</option><option>Small (under 0.5 acre / kitchen-garden scale)</option><option>Medium (0.5–2 acres)</option><option>Large (2+ acres)</option></select></div>
+          <div class="field"><label>Main goal</label><select id="ca-goal"><option value="">Select</option><option>Higher productivity</option><option>Lower water use</option><option>Organic production</option><option>Diversification</option></select></div>
+        </div>
+        <button class="btn btn-primary" onclick="runCropAdvisor()">Show suitable crop categories</button>
+      </div>
+      <div id="cropResults" style="margin-top:26px;"></div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ WATER MANAGEMENT ============================================================ -->
+<section class="page" id="page-water">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">SMART WATER MANAGEMENT</span>
+        <h2>From rainfall to reuse</h2>
+        <p>Rainwater harvesting → storage → distribution → hydroponics / drip irrigation → recovery → treatment &amp; quality check → appropriate reuse.</p>
+      </div>
+      <div class="grid grid-4">
+        <div class="card"><span class="icon-badge badge-water">🌧️</span><h3>Harvesting</h3><p class="small">Roof and surface run-off is channelled into collection points during rainfall.</p></div>
+        <div class="card"><span class="icon-badge badge-water">🛢️</span><h3>Storage</h3><p class="small">Collected water is held in tanks or storage structures sized to expected demand.</p></div>
+        <div class="card"><span class="icon-badge badge-green">🚿</span><h3>Distribution</h3><p class="small">Pumps and pipes move stored water to hydroponic channels and drip lines.</p></div>
+        <div class="card"><span class="icon-badge badge-soil">♻️</span><h3>Recovery &amp; reuse</h3><p class="small">Where technically appropriate and after quality checks, water is recovered for further appropriate use.</p></div>
+      </div>
+
+      <div class="notice blue" style="margin-top:28px;">Water reuse always depends on appropriate treatment and a quality assessment before reuse — this project does not assume all recovered water is automatically safe to reuse for every purpose.</div>
+
+      <div class="card" style="margin-top:30px;">
+        <h3>Rainwater harvesting calculator <span class="tag amber">Estimate</span></h3>
+        <p class="small">Uses a standard estimation formula. Actual collection depends on roof material, first losses, and rainfall distribution — treat this as a planning estimate, not a guarantee.</p>
+        <div class="two-col">
+          <div class="field"><label>Roof / catchment area (m²)</label><input type="number" id="w-area" placeholder="e.g. 120"></div>
+          <div class="field"><label>Expected rainfall (mm, for period)</label><input type="number" id="w-rain" placeholder="e.g. 150"></div>
+        </div>
+        <div class="two-col">
+          <div class="field"><label>Storage tank capacity (litres)</label><input type="number" id="w-storage" placeholder="e.g. 5000"></div>
+          <div class="field"><label>Irrigation requirement (litres/day)</label><input type="number" id="w-need" placeholder="e.g. 300"></div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="calcWater()">Calculate estimate</button>
+        <div id="waterCalcOut" class="result-hidden" style="margin-top:18px;"></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ HYDROPONICS ============================================================ -->
+<section class="page" id="page-hydroponics">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">HYDROPONICS</span>
+        <h2>Growing plants without soil</h2>
+        <p>Hydroponics is a method of growing plants without soil by supplying water and essential mineral nutrients through a controlled nutrient solution. It is one possible farming method — not a universal replacement for soil farming.</p>
+      </div>
+      <div class="split">
+        <div class="card-soft">
+          <svg viewBox="0 0 420 260" id="hydroSvg">
+            <rect x="20" y="180" width="70" height="50" rx="6" fill="#8FC1D1" stroke="#2B6E86" stroke-width="2"/>
+            <text x="55" y="243" text-anchor="middle" font-size="11" font-family="Inter">Reservoir</text>
+            <rect x="120" y="195" width="26" height="20" rx="4" fill="#3C7A5E"/>
+            <text x="133" y="228" text-anchor="middle" font-size="11" font-family="Inter">Pump</text>
+            <rect x="170" y="60" width="220" height="18" rx="9" fill="#EAF4F7" stroke="#2B6E86" stroke-width="2"/>
+            <rect x="170" y="100" width="220" height="18" rx="9" fill="#EAF4F7" stroke="#2B6E86" stroke-width="2"/>
+            <rect x="170" y="140" width="220" height="18" rx="9" fill="#EAF4F7" stroke="#2B6E86" stroke-width="2"/>
+            <g id="plantsRow">
+              <text x="190" y="55" font-size="16">🌿</text><text x="230" y="55" font-size="16">🌿</text><text x="270" y="55" font-size="16">🌿</text><text x="310" y="55" font-size="16">🌿</text><text x="350" y="55" font-size="16">🌿</text>
+              <text x="190" y="95" font-size="16">🌿</text><text x="230" y="95" font-size="16">🌿</text><text x="270" y="95" font-size="16">🌿</text><text x="310" y="95" font-size="16">🌿</text><text x="350" y="95" font-size="16">🌿</text>
+              <text x="190" y="135" font-size="16">🌿</text><text x="230" y="135" font-size="16">🌿</text><text x="270" y="135" font-size="16">🌿</text><text x="310" y="135" font-size="16">🌿</text><text x="350" y="135" font-size="16">🌿</text>
+            </g>
+            <path d="M146,205 L170,205 L170,69 L390,69" class="flow-line" id="hydroFlow1"/>
+            <path d="M390,78 L390,158" class="flow-line" id="hydroFlow2"/>
+            <path d="M390,158 L400,158 L400,205 L146,205" class="flow-line" id="hydroFlow3"/>
+            <circle cx="55" cy="200" r="5" fill="#2B6E86"/>
+          </svg>
+          <button class="btn btn-secondary btn-sm" onclick="toggleHydroFlow()">▶ Animate nutrient flow</button>
+        </div>
+        <div>
+          <h3>Storage → Pump → Channels → Plants → Collection → Recirculation</h3>
+          <p>A nutrient solution is pumped from the reservoir through channels where plant roots absorb water and nutrients directly, then the remaining solution returns to the reservoir to be recirculated.</p>
+          <div class="grid grid-2" style="margin-top:16px;">
+            <div class="card"><h3>Where it may help</h3><p class="small">Limited land, controlled-environment growing, leafy greens and herbs, water-conscious settings.</p></div>
+            <div class="card"><h3>Considerations</h3><p class="small">Needs reliable power, nutrient management, and monitoring — not automatically cheaper or easier than soil farming.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ DRIP IRRIGATION ============================================================ -->
+<section class="page" id="page-drip">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">DRIP IRRIGATION</span>
+        <h2>Targeted water delivery to the root zone</h2>
+      </div>
+      <div class="split">
+        <div>
+          <p>Tank → Pump → Main pipe → Distribution pipe → Drip emitters → Root zone.</p>
+          <ul>
+            <li><b>Targeted delivery</b> — water reaches the root zone directly, with less lost to evaporation or run-off.</li>
+            <li><b>Suitable for many row and orchard crops</b>, though not every crop or soil benefits equally.</li>
+            <li><b>Automation possible</b> with timers or sensors, at additional cost.</li>
+          </ul>
+          <div class="notice">Benefits depend on correct design, emitter spacing and maintenance — a poorly designed drip system may not outperform other methods.</div>
+        </div>
+        <div class="card-soft">
+          <svg viewBox="0 0 420 220" id="dripSvg">
+            <rect x="10" y="30" width="50" height="70" rx="6" fill="#8FC1D1" stroke="#2B6E86" stroke-width="2"/>
+            <text x="35" y="112" text-anchor="middle" font-size="10">Tank</text>
+            <rect x="80" y="55" width="24" height="18" fill="#3C7A5E" rx="4"/>
+            <text x="92" y="86" text-anchor="middle" font-size="10">Pump</text>
+            <path d="M60,65 L80,65" class="flow-line"/>
+            <path d="M104,65 L150,65 L150,150" class="flow-line" id="dripMain"/>
+            <path d="M150,150 L390,150" class="flow-line" id="dripDist"/>
+            <g id="emitters">
+              <circle cx="190" cy="150" r="4" fill="#2B6E86" class="emitter"/>
+              <circle cx="240" cy="150" r="4" fill="#2B6E86" class="emitter"/>
+              <circle cx="290" cy="150" r="4" fill="#2B6E86" class="emitter"/>
+              <circle cx="340" cy="150" r="4" fill="#2B6E86" class="emitter"/>
+              <text x="185" y="190" font-size="16">🌱</text><text x="235" y="190" font-size="16">🌱</text><text x="285" y="190" font-size="16">🌱</text><text x="335" y="190" font-size="16">🌱</text>
+            </g>
+          </svg>
+          <button class="btn btn-secondary btn-sm" onclick="toggleDripFlow()">▶ Animate water flow</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:30px;">
+        <h3>Irrigation estimate calculator <span class="tag amber">Estimate</span></h3>
+        <div class="two-col">
+          <div class="field"><label>Number of plants</label><input type="number" id="d-plants" placeholder="e.g. 200"></div>
+          <div class="field"><label>Water per plant per day (litres)</label><input type="number" id="d-perplant" placeholder="e.g. 2"></div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="calcDrip()">Calculate daily requirement</button>
+        <div id="dripOut" class="result-hidden" style="margin-top:14px;"></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ ORGANIC FARM ============================================================ -->
+<section class="page" id="page-organic">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">ORGANIC FARM</span>
+        <h2>Soil health, biodiversity and responsible inputs</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card"><span class="icon-badge badge-green">🌾</span><h3>Crop production</h3><p class="small">Crops grown with organic inputs and rotation practices suited to the soil and climate.</p></div>
+        <div class="card"><span class="icon-badge badge-soil">🪱</span><h3>Soil health</h3><p class="small">Compost, farmyard manure and cover crops build organic matter over time.</p></div>
+        <div class="card"><span class="icon-badge badge-amber">🐝</span><h3>Biodiversity</h3><p class="small">Diverse plantings and reduced chemical inputs can support beneficial insects and soil life.</p></div>
+      </div>
+      <div class="notice" style="margin-top:22px;">Organic farming does not automatically mean higher yield, and it is not input-free — it uses organic inputs such as compost, manure and biological pest management instead of most synthetic ones. Results vary by crop, soil and management.</div>
+      <div class="card" style="margin-top:22px;">
+        <h3>Connection to livestock</h3>
+        <p>Livestock on the same farm can supply manure as an organic input for crop fields, while crop residues can in turn support animal feed — one of the links the EcoCycle is built around.</p>
+        <a href="#ecocycle" class="btn btn-secondary btn-sm">See this link in the EcoCycle →</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ LIVESTOCK ============================================================ -->
+<section class="page" id="page-livestock">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">ANIMAL INTEGRATION</span>
+        <h2>Livestock as part of the ecosystem</h2>
+        <p>Livestock are shown here as an integrated part of the farm, not a separate enterprise — suitable organic waste they produce can become a resource for biogas production.</p>
+      </div>
+      <div class="flex wrap gap16" style="align-items:center; justify-content:center; margin:26px 0;">
+        <div class="card center" style="min-width:160px;">🐄<br><b class="small">Animal Farm</b></div>
+        <div class="small bold">↓</div>
+        <div class="card center" style="min-width:160px;">🌿<br><b class="small">Suitable organic waste</b></div>
+        <div class="small bold">↓</div>
+        <div class="card center" style="min-width:160px;">🔥<br><b class="small">Biogas digester</b></div>
+        <div class="small bold">↓</div>
+        <div class="card center" style="min-width:160px;">💧🔥<br><b class="small">Biogas + digestate</b></div>
+        <div class="small bold">↓</div>
+        <div class="card center" style="min-width:160px;">✅<br><b class="small">Appropriate use</b></div>
+      </div>
+      <div class="notice red">Not all animal waste is automatically suitable for a digester — factors like species, bedding material, and contamination affect whether and how it can be used. This should be verified against the digester's design specifications.</div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ BIOGAS ============================================================ -->
+<section class="page" id="page-biogas">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">BIOGAS SYSTEM</span>
+        <h2>Anaerobic digestion of suitable feedstock</h2>
+      </div>
+      <div class="split">
+        <div class="card-soft">
+          <svg viewBox="0 0 420 240" id="biogasSvg">
+            <rect x="10" y="150" width="70" height="50" rx="6" fill="#C79A6E" stroke="#8A5A34" stroke-width="2"/>
+            <text x="45" y="213" text-anchor="middle" font-size="10">Feedstock input</text>
+            <ellipse cx="210" cy="140" rx="90" ry="60" fill="#E9F3EC" stroke="#3C7A5E" stroke-width="2"/>
+            <text x="210" y="145" text-anchor="middle" font-size="11">Digester</text>
+            <path d="M80,175 L120,175" class="flow-line" id="bgFlow1"/>
+            <circle cx="210" cy="70" r="22" fill="#EFEDE6" stroke="#8A5A34" stroke-width="2" id="gasBubble"/>
+            <text x="210" y="75" text-anchor="middle" font-size="10">Gas</text>
+            <path d="M210,80 L210,55" class="flow-line" id="bgFlow2"/>
+            <path d="M232,60 L340,60" class="flow-line" id="bgFlow3"/>
+            <rect x="340" y="45" width="60" height="30" rx="4" fill="#FBF2DF" stroke="#E2A33B" stroke-width="2"/>
+            <text x="370" y="64" text-anchor="middle" font-size="9">Pipeline / use</text>
+            <path d="M290,170 L340,170" class="flow-line" id="bgFlow4"/>
+            <rect x="340" y="150" width="60" height="40" rx="4" fill="#F3E9DE" stroke="#8A5A34" stroke-width="2"/>
+            <text x="370" y="173" text-anchor="middle" font-size="9">Digestate</text>
+            <text x="370" y="185" text-anchor="middle" font-size="9">outlet</text>
+          </svg>
+          <button class="btn btn-secondary btn-sm" onclick="toggleBiogasFlow()">▶ Animate digestion flow</button>
+        </div>
+        <div>
+          <h3>How it works</h3>
+          <p>Suitable organic feedstock is processed through anaerobic digestion (breakdown by microbes in the absence of oxygen) to produce biogas and digestate.</p>
+          <p><b>Biogas</b> — a mix of gases including methane, which can be piped for uses such as cooking fuel where the system is designed for it. This project does not assume electricity generation unless a generator is specifically part of the setup.</p>
+          <p><b>Digestate</b> — the leftover material after digestion, which can be a nutrient-rich input for fields after appropriate handling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ ENERGY ============================================================ -->
+<section class="page" id="page-energy">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">SMART ENERGY</span>
+        <h2>Hybrid renewable energy</h2>
+      </div>
+      <div class="flex wrap gap16" style="align-items:center;justify-content:center; margin:26px 0;">
+        <div class="card center" style="min-width:150px;">☀️<br><b class="small">Solar panels</b></div>
+        <div class="small bold">→</div>
+        <div class="card center" style="min-width:150px;">🎛️<br><b class="small">Controller</b></div>
+        <div class="small bold">→</div>
+        <div class="card center" style="min-width:150px;">🔋<br><b class="small">Battery</b></div>
+        <div class="small bold">→</div>
+        <div class="card center" style="min-width:150px;">🚿📡<br><b class="small">Pumps / Sensors / Controls</b></div>
+      </div>
+      <div class="grid grid-3">
+        <div class="card"><h3>Solar</h3><p class="small">Primary renewable source, generating power during daylight hours.</p></div>
+        <div class="card"><h3>Battery</h3><p class="small">Short-term storage, bridging gaps between generation and use.</p></div>
+        <div class="card"><h3>Grid backup</h3><p class="small">A reliability backup for periods of low generation or high demand.</p></div>
+      </div>
+      <div class="notice red" style="margin-top:20px;">This model is not claimed to be fully energy independent unless specifically demonstrated — grid backup is included precisely because solar and battery alone may not cover all needs at all times.</div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ ECOCYCLE ============================================================ -->
+<section class="page" id="page-ecocycle">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">THE ECOCYCLE</span>
+        <h2>Click any part of the loop</h2>
+        <p>Collect → Store → Distribute → Produce → Recover → Reuse. Every stage feeds into a connected system rather than standing alone.</p>
+      </div>
+      <div class="ecocycle-wrap">
+        <svg viewBox="0 0 480 480" id="cycleSvg">
+          <circle cx="240" cy="240" r="170" fill="none" stroke="#D7DECB" stroke-width="2" stroke-dasharray="1 0"/>
+          <!-- nodes placed around circle -->
+        </svg>
+        <div class="cycle-detail" id="cycleDetail">
+          <span class="eyebrow">SELECT A NODE</span>
+          <h3>Click a stage of the EcoCycle</h3>
+          <p class="small">Choose any labelled point on the loop to see what enters, what happens, what comes out, and where it goes next.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ FARM PLANNER ============================================================ -->
+<section class="page" id="page-planner">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">DESIGN MY FARM</span>
+        <h2>Conceptual farm layout planner</h2>
+        <p>Enter your farm elements below to generate a conceptual layout. This is a planning concept for exhibition purposes, not a certified engineering design.</p>
+      </div>
+      <div class="split">
+        <div class="card">
+          <div class="two-col">
+            <div class="field"><label>Land length (m)</label><input type="number" id="pl-length" value="40"></div>
+            <div class="field"><label>Land width (m)</label><input type="number" id="pl-width" value="25"></div>
+          </div>
+          <div class="field"><label>Water source</label><select id="pl-water"><option>Bore well</option><option>Pond</option><option>Rainfed only</option><option>Canal</option></select></div>
+          <div class="field"><label>Include hydroponics?</label><select id="pl-hydro"><option>Yes</option><option>No</option></select></div>
+          <div class="field"><label>Include drip irrigation field?</label><select id="pl-drip"><option>Yes</option><option>No</option></select></div>
+          <div class="field"><label>Include livestock area?</label><select id="pl-livestock"><option>Yes</option><option>No</option></select></div>
+          <div class="field"><label>Include biogas plant?</label><select id="pl-biogas"><option>Yes</option><option>No</option></select></div>
+          <div class="field"><label>Include solar area?</label><select id="pl-solar"><option>Yes</option><option>No</option></select></div>
+          <button class="btn btn-primary" onclick="generateLayout()">Generate layout</button>
+        </div>
+        <div class="card-soft">
+          <svg viewBox="0 0 400 260" id="layoutSvg"></svg>
+          <p class="hint center">Conceptual layout only — actual placement should account for slope, sunlight, access paths and local regulations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">WATER FLOW SIMULATOR</span><h2>Trace water through the system</h2></div>
+      <div class="btn-row" id="simButtons">
+        <button class="btn btn-ghost btn-sm" data-sim="rain">Rainwater</button>
+        <button class="btn btn-ghost btn-sm" data-sim="storage">Storage</button>
+        <button class="btn btn-ghost btn-sm" data-sim="hydro">Hydroponics</button>
+        <button class="btn btn-ghost btn-sm" data-sim="drip">Drip</button>
+        <button class="btn btn-ghost btn-sm" data-sim="organic">Organic Farm</button>
+        <button class="btn btn-ghost btn-sm" data-sim="recovery">Recovery</button>
+        <button class="btn btn-primary btn-sm" data-sim="full">▶ Full System</button>
+      </div>
+      <div class="card-soft" style="margin-top:16px;">
+        <svg viewBox="0 0 700 160" id="simSvg">
+          <g id="simNodes"></g>
+        </svg>
+        <p class="small center" id="simLabel">Select a pathway above to animate water moving through the system.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ EXPLORE RESORT ============================================================ -->
+<section class="page" id="page-explore">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">EXPLORE THE ECOAGRI RESORT</span>
+        <h2>Interactive model schematic</h2>
+        <p>Standing in front of the physical exhibition model? Tap a zone below to read what it demonstrates.</p>
+      </div>
+      <div class="map-wrap">
+        <svg viewBox="0 0 480 340" id="mapSvg"></svg>
+        <div class="cycle-detail" id="mapDetail">
+          <span class="eyebrow">SELECT A ZONE</span>
+          <h3>Tap a zone on the model</h3>
+          <p class="small">Each of the 10 zones corresponds to a physical part of the exhibition model.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ KNOWLEDGE CENTRE ============================================================ -->
+<section class="page" id="page-knowledge">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">FARM KNOWLEDGE CENTRE</span>
+        <h2>Short, farmer-friendly explanations</h2>
+      </div>
+      <div id="accordionHolder"></div>
+      <hr class="soft">
+      <h3>Glossary</h3>
+      <table class="clean" id="glossaryTable"></table>
+    </div>
+  </section>
+
+  <section class="section-tight" style="background:var(--mist-2)">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">WEATHER &amp; FARM ALERTS</span><h2>Based on your saved location</h2></div>
+      <div id="alertPanel"></div>
+      <div class="notice red">This panel gives general weather-related farm planning considerations, not specific pesticide or fertilizer instructions. For important agricultural decisions, verify with a qualified local agricultural expert or an authoritative advisory service.</div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">LOCAL AGRICULTURAL SUPPORT</span><h2>Resources worth checking locally</h2></div>
+      <div class="grid grid-2">
+        <div class="card"><h3>Krishi Vigyan Kendra (KVK)</h3><p class="small">District-level KVKs provide soil testing, crop advice and demonstrations. Search "KVK Hailakandi" or your own district for contact details.</p></div>
+        <div class="card"><h3>State Agriculture Department</h3><p class="small">The Assam Department of Agriculture publishes schemes, advisories and contact points for farmer support.</p></div>
+        <div class="card"><h3>Agricultural universities</h3><p class="small">Assam Agricultural University (AAU) and ICAR institutes offer research-backed regional guidance.</p></div>
+        <div class="card"><h3>India Meteorological Department</h3><p class="small">IMD publishes district-level weather forecasts and agromet advisories.</p></div>
+      </div>
+      <p class="small" style="margin-top:14px;">These are general pointers for this exhibition project — always confirm current contact details and services directly with the concerned office.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" style="background:var(--mist-2)">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">FARM COST &amp; PLANNING</span><h2>Rough planning categories</h2></div>
+      <div class="card">
+        <p class="small">Select the elements you're considering. This produces <b>estimated planning cost categories</b> for discussion — never a guaranteed cost or profit figure.</p>
+        <div class="chip-select" id="costChips">
+          <span class="chip" data-val="Land prep">Land prep</span>
+          <span class="chip" data-val="Irrigation / pump">Irrigation / pump</span>
+          <span class="chip" data-val="Greenhouse / hydroponics">Greenhouse / hydroponics</span>
+          <span class="chip" data-val="Solar">Solar</span>
+          <span class="chip" data-val="Livestock shelter">Livestock shelter</span>
+          <span class="chip" data-val="Biogas digester">Biogas digester</span>
+        </div>
+        <button class="btn btn-primary btn-sm" style="margin-top:16px;" onclick="showCostPlan()">Show planning categories</button>
+        <div id="costOut" style="margin-top:16px;"></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ IMPACT ============================================================ -->
+<section class="page" id="page-impact">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">IMPACT DASHBOARD</span>
+        <h2>Conceptual indicators</h2>
+        <p>These are model-concept indicators for the exhibition design, not measured experimental results.</p>
+      </div>
+      <div class="grid grid-3" id="gaugeGrid"></div>
+      <div class="notice" style="margin-top:10px;">Labels used: <b>Model concept</b>, <b>Potential</b>, <b>Estimated</b>, <b>Simulation</b>, <b>Demonstration</b>. No real experimental measurements are claimed here.</div>
+      <div class="card" style="margin-top:24px;">
+        <h3>Enter measured data (optional, for future exhibitions)</h3>
+        <div class="two-col">
+          <div class="field"><label>Measured water saved (litres)</label><input type="number" id="im-water"></div>
+          <div class="field"><label>Measured biogas produced (litres/day)</label><input type="number" id="im-biogas"></div>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="saveImpactData()">Save measured data</button>
+        <p class="small" id="impactSaved"></p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ EXHIBITION MODE ============================================================ -->
+<section class="page" id="page-exhibition">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">EXHIBITION MODE — FOR JUDGES</span>
+        <h2>Walk through the project in sequence</h2>
+        <div class="btn-row" style="margin-top:14px;">
+          <button class="btn btn-ghost btn-sm" onclick="setExhibitLength(2)">2-minute mode</button>
+          <button class="btn btn-ghost btn-sm" onclick="setExhibitLength(5)">5-minute detailed mode</button>
+        </div>
+      </div>
+      <div class="exhibit-progress" id="exhibitProgress"></div>
+      <div id="exhibitSlides"></div>
+      <div class="btn-row" style="margin-top:22px;">
+        <button class="btn btn-ghost" onclick="exhibitNav(-1)">← Previous</button>
+        <button class="btn btn-primary" onclick="exhibitNav(1)">Next →</button>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ ABOUT ============================================================ -->
+<section class="page" id="page-about">
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">ABOUT THE PROJECT</span>
+        <h2>EcoAgri Resort</h2>
+      </div>
+      <div class="grid grid-2">
+        <table class="clean">
+          <tr><th>Project</th><td>EcoAgri Resort</td></tr>
+          <tr><th>Theme</th><td>Integrated Sustainable Agriculture</td></tr>
+          <tr><th>Prepared by</th><td>Tohil Arman Mazumder</td></tr>
+          <tr><th>Class</th><td>XI – Science</td></tr>
+          <tr><th>School</th><td>Jawahar Navodaya Vidyalaya, Monacherra, Hailakandi, Assam</td></tr>
+        </table>
+        <div>
+          <h3>Aim</h3><p class="small">To design and demonstrate an integrated model of sustainable farming that connects water, crop, livestock, energy and waste-recovery systems, alongside a digital tool that helps ordinary farmers apply similar thinking to their own land.</p>
+          <h3>Objectives</h3><p class="small">Demonstrate rainwater harvesting and reuse; show hydroponics, drip irrigation and organic farming side by side; integrate livestock and biogas; incorporate renewable energy; and provide farmers a simple digital guidance tool.</p>
+        </div>
+      </div>
+      <hr class="soft">
+      <div class="grid grid-2">
+        <div><h3>Innovation</h3><p class="small">The core innovation is treating these technologies as one connected ecosystem rather than isolated add-ons, and extending that ecosystem digitally through the Farm Mentor, which reasons over a farmer's own location, soil, water, land and goals.</p></div>
+        <div><h3>Working principle</h3><p class="small">Resources move in a loop: water is collected, stored and distributed to production systems; organic outputs from farming and livestock are processed for recovery; recovered resources and renewable energy support the next cycle.</p></div>
+      </div>
+      <div class="grid grid-2" style="margin-top:6px;">
+        <div><h3>Sustainability</h3><p class="small">The model is described as a zero-waste-oriented, resource-recovery system — not a claim of zero waste or zero pollution.</p></div>
+        <div><h3>Future scope</h3><p class="small">Physical sensor integration, real measured impact data, expanded crop and regional datasets, and wider farmer testing of the Digital Farm Mentor.</p></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============================================================ QR LANDING ============================================================ -->
+<section class="page" id="page-qr">
+  <section style="min-height:70vh; display:flex; align-items:center;">
+    <div class="container center">
+      <span class="eyebrow">SCANNED FROM THE EXHIBITION MODEL</span>
+      <h1 style="margin-top:10px;">Welcome to EcoAgri Resort</h1>
+      <p style="max-width:480px;margin:14px auto 0;">You're standing in front of the physical model. Choose where to start.</p>
+      <div class="btn-row center" style="justify-content:center; margin-top:26px;">
+        <a href="#explore" class="btn btn-primary">Explore the Physical Model</a>
+        <a href="#mentor" class="btn btn-secondary">Try Digital Farm Mentor</a>
+        <a href="#ecocycle" class="btn btn-ghost">See EcoCycle</a>
+        <a href="#knowledge" class="btn btn-ghost">Learn How It Works</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="fgrid">
+      <div>
+        <div class="brand" style="color:var(--paper); margin-bottom:10px;"><span class="brand-mark"></span> EcoAgri Resort</div>
+        <p style="color:#AEC4B0; max-width:320px;">An integrated sustainable farming &amp; smart agriculture ecosystem, with a Digital Farm Mentor extending it to every farmer's own conditions.</p>
+      </div>
+      <div><h4>Explore</h4><ul><li><a href="#ecocycle">EcoCycle</a></li><li><a href="#explore">Physical Model</a></li><li><a href="#mentor">Farm Mentor</a></li><li><a href="#knowledge">Knowledge Centre</a></li></ul></div>
+      <div><h4>Systems</h4><ul><li><a href="#water">Water</a></li><li><a href="#hydroponics">Hydroponics</a></li><li><a href="#biogas">Biogas</a></li><li><a href="#energy">Energy</a></li></ul></div>
+      <div><h4>Project</h4><ul><li><a href="#about">About</a></li><li><a href="#exhibition">Exhibition Mode</a></li><li><a href="#impact">Impact</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>Jawahar Navodaya Vidyalaya, Monacherra, Hailakandi, Assam</span>
+      <span>Prepared by Tohil Arman Mazumder, Class XI – Science</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
